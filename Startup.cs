@@ -26,7 +26,7 @@ namespace Application
         public void ConfigureServices(IServiceCollection services)
         {
             //applying dbcontext connection using dbContextPool (better performance) and the connetion string from appsettings.json 
-            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_config.GetConnectionString("ProductDBConnection")));
 
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<IProductRepository, ProductRepository>();

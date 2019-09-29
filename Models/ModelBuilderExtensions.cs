@@ -13,6 +13,7 @@ namespace Application.Models
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
+                    Id= "g9IFYiz0iA",
                     Name = "Oranżada Fantazja Czerwona 330ml",
                     Unit = Unit.Each,
                     Qty = 1,
@@ -20,6 +21,7 @@ namespace Application.Models
                 },
                 new Product
                 {
+                    Id= "r1PskoTkWF",
                     Name = "Oranżada Fantazja Orange 330ml",
                     Unit = Unit.Each,
                     Qty = 1,
