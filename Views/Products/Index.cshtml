@@ -15,8 +15,8 @@
             </div>
             <img class="card-img-top imageTumbnail" src="@photoPath" asp-append-version="true" />
             <div class="card-footer text-center">
-                <a asp-controller="home" asp-action="details" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">View</a>
-                <a asp-action="edit" asp-controller="home" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">Edit</a>
+                <a asp-controller="products" asp-action="details" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">View</a>
+                <a asp-action="edit" asp-controller="products" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">Edit</a>
                 <a href="#" class="btn btn-danger btn-sm m-1">Delete</a>
             </div>
         </div>

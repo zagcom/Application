@@ -1,0 +1,38 @@
+﻿@model ProductDetailsViewModel
+@{
+
+    ViewBag.Title = "Product Details";
+    var photoPath = "~/Images/" + (Model.Product.PhotoPath ?? "placeholder-image.jpg");
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Product.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+                <h4>Product EAN : @Model.Product.EAN </h4>
+                <h4>Quantity : @Model.Product.Qty </h4>
+                <h4>Unit : @Model.Product.Unit </h4>
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-controller="products" asp-action="index" class="btn btn-primary btn-sm">Back</a>
+                <a asp-action="edit" asp-controller="products" asp-route-id="@Model.Product.Id" class="btn btn-primary btn-sm">Edit</a>
+                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts
+
+{
+    <script src="~/js/CustomScript.js"></script>
+}

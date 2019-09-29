@@ -62,6 +62,7 @@ namespace Application.Controllers
                 {
                     Name = model.Name,
                     Qty = model.Qty,
+                    EAN = model.EAN,
                     Unit = model.Unit,
                     PhotoPath = uniqueFileName
                 };
@@ -84,6 +85,7 @@ namespace Application.Controllers
                 Name = product.Name,
                 Qty = product.Qty,
                 Unit = product.Unit,
+                EAN = product.EAN,
                 ExistingPhotoPath = product.PhotoPath
             };
             return View(productEditViewModel);
