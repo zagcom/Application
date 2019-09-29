@@ -7,10 +7,10 @@ namespace Application.Models
 {
     public interface IProductRepository
     {
-        Product GetProduct(int Id);
+        Product GetProduct(string Id);
         IEnumerable<Product> GetAllProduct();
         Product Add(Product employee);
         Product Update(Product employeeChanges);
-        Product Delete(int id);
+        Product Delete(string id);
     }
 }

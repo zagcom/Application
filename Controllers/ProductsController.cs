@@ -28,11 +28,11 @@ namespace Application.Controllers
         }
 
 
-        public ViewResult Details(int? id)
+        public ViewResult Details(string id)
         {
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel()
             {
-                Product = _productRepository.GetProduct(id ?? 1),
+                Product = _productRepository.GetProduct(id),
                 PageTitle = "Product Details"
             };
 
@@ -75,7 +75,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public ViewResult Edit(int id)
+        public ViewResult Edit(string id)
         {
             Product product = _productRepository.GetProduct(id);
             ProductEditViewModel productEditViewModel = new ProductEditViewModel

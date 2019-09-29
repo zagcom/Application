@@ -21,7 +21,7 @@ namespace Application.Models
             return employee;
         }
 
-        public Product Delete(int id)
+        public Product Delete(string id)
         {
             Product product = context.Products.Find(id);
             if (product != null)
@@ -37,7 +37,7 @@ namespace Application.Models
             return context.Products;
         }
 
-        public Product GetProduct(int Id)
+        public Product GetProduct(string Id)
         {
             return context.Products.Find(Id);
         }
