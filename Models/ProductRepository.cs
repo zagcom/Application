@@ -16,27 +16,38 @@ namespace Application.Models
 
         public Product Add(Product employee)
         {
-            throw new NotImplementedException();
+            context.Products.Add(employee);
+            context.SaveChanges();
+            return employee;
         }
 
         public Product Delete(int id)
         {
-            throw new NotImplementedException();
+            Product product = context.Products.Find(id);
+            if (product != null)
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+            }
+            return product;
         }
 
         public IEnumerable<Product> GetAllProduct()
         {
-            throw new NotImplementedException();
+            return context.Products;
         }
 
         public Product GetProduct(int Id)
         {
-            throw new NotImplementedException();
+            return context.Products.Find(Id);
         }
 
-        public Product Update(Product employeeChanges)
+        public Product Update(Product productChanges)
         {
-            throw new NotImplementedException();
+            var product = context.Products.Attach(productChanges);
+            product.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return productChanges;
         }
     }
 }
