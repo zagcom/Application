@@ -1,20 +1,21 @@
-﻿using System;
+﻿using Application.Models;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.Models
+namespace Application.ViewModels
 {
-    public class Product
+    public class ProductCreateViewModel
     {
-        public string Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string EAN { get; set; }
         [Required]
         public Unit? Unit { get; set; }
         public float Qty { get; set; }
-        public string PhotoPath { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }
