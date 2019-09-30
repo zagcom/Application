@@ -30,9 +30,17 @@ namespace Application.Controllers
 
         public ViewResult Details(string id)
         {
+            Product product = _productRepository.GetProduct(id);
+
+            if( product == null)
+            {
+                Response.StatusCode = 404;
+                return View("ProductNotFound", id);
+            }
+
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel()
             {
-                Product = _productRepository.GetProduct(id),
+                Product = product,
                 PageTitle = "Product Details"
             };
 
