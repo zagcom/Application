@@ -50,14 +50,7 @@ namespace Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
-                if (model.Photo != null)
-                {
-                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
+                string uniqueFileName = ProcessUploadedFile(model);
                 Product newProduct = new Product
                 {
                     Name = model.Name,
@@ -89,6 +82,56 @@ namespace Application.Controllers
                 ExistingPhotoPath = product.PhotoPath
             };
             return View(productEditViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Product product = _productRepository.GetProduct(model.Id);
+
+                product.Name = model.Name;
+                product.Qty = model.Qty;
+                product.Unit = model.Unit;
+                product.EAN = model.EAN;
+
+                if(model.Photo != null)
+
+                { 
+                    if(model.ExistingPhotoPath != null)
+                    {
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    product.PhotoPath = ProcessUploadedFile(model);
+                }
+                
+                _productRepository.Update(product);
+                return RedirectToAction("index");
+            }
+
+            return View();
+
+        }
+
+        private string ProcessUploadedFile(ProductCreateViewModel model)
+        {
+            string uniqueFileName = null;
+            if (model.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using(var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Photo.CopyTo(fileStream);
+                }
+                
+            }
+
+            return uniqueFileName;
         }
     }
 }
