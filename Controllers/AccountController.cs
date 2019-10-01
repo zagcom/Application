@@ -38,7 +38,7 @@ namespace Application.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +47,15 @@ namespace Application.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "products");
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "products");
+                    }
+                    
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
