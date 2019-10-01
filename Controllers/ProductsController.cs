@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Models;
 using Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -23,14 +25,14 @@ namespace Application.Controllers
             this.hostingEnvironment = hostingEnvironment;
             this.logger = logger;
         }
-
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var model = _productRepository.GetAllProduct();
             return View(model);
         }
 
-
+        [AllowAnonymous]
         public ViewResult Details(string id)
         {
             logger.LogTrace("Trace Log");
@@ -57,7 +59,7 @@ namespace Application.Controllers
             return View(productDetailsViewModel);
         }
 
-        [HttpGet]
+        [HttpGet]        
         public ViewResult Create()
         {
             return View();
