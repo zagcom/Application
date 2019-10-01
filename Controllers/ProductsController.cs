@@ -7,6 +7,7 @@ using Application.Models;
 using Application.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
@@ -14,11 +15,13 @@ namespace Application.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogger logger;
 
-        public ProductsController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment)
+        public ProductsController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment, ILogger<ProductsController> logger)
         {
             _productRepository = productRepository;
             this.hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
 
         public ViewResult Index()
@@ -30,6 +33,13 @@ namespace Application.Controllers
 
         public ViewResult Details(string id)
         {
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Critical Log");
+
             Product product = _productRepository.GetProduct(id);
 
             if( product == null)

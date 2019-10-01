@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +9,12 @@ namespace Application.Models
     public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext context;
+        private readonly ILogger<ProductRepository> logger;
 
-        public ProductRepository(AppDbContext context)
+        public ProductRepository(AppDbContext context, ILogger<ProductRepository> logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         public Product Add(Product employee)
@@ -39,6 +42,13 @@ namespace Application.Models
 
         public Product GetProduct(string Id)
         {
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Critical Log");
+
             return context.Products.Find(Id);
         }
 
