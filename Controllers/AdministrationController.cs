@@ -36,7 +36,7 @@ namespace Application.Controllers
                 IdentityResult result = await roleManager.CreateAsync(identityRole);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("ListRoles", "Administration");
                 }
 
                 foreach(IdentityError error in result.Errors)
