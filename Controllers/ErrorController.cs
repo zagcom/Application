@@ -35,14 +35,15 @@ namespace Application.Controllers
             }
             return View("NotFound");
         }
-        [Route("Error")]
         [AllowAnonymous]
+        [Route("Error")]
         public IActionResult Error()
         {
-            var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var exceptionHandlerPathFeature =
+                HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            logger.LogError($"The path{exceptionDetails.Path} threw an exception {exceptionDetails.Error}");
-
+            logger.LogError($"The path {exceptionHandlerPathFeature.Path} " +
+                $"threw an exception {exceptionHandlerPathFeature.Error}");
 
             return View("Error");
         }
