@@ -38,12 +38,17 @@ namespace Application
                 })
                 .AddEntityFrameworkStores<AppDbContext>();
 
-           
-
             services.AddMvc(options => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DeleteRolePolicy",
+                    policy => policy.RequireClaim("Delete Role").RequireClaim("Create Role"));
+            });
+
             services.AddScoped<IProductRepository, ProductRepository>();
         }
 
