@@ -43,6 +43,11 @@ namespace Application
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
