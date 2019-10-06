@@ -57,6 +57,8 @@ namespace Application
                 options.AddPolicy("EditRolePolicy",
                     policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
 
+                options.InvokeHandlersAfterFailure = false;
+
                 options.AddPolicy("AdminRolePolicy",
                     policy => policy.RequireClaim("Admin"));
             });
