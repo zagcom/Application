@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Models;
+using Application.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,13 +55,15 @@ namespace Application
                     policy => policy.RequireClaim("Delete Role"));
 
                 options.AddPolicy("EditRolePolicy",
-                    policy => policy.RequireAssertion(context=> context.User.IsInRole("Admin")&&context.User.HasClaim(claim=>claim.Type == "Edit Role"&&claim.Value=="true")||context.User.IsInRole("Super Admin")));
+                    policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
 
                 options.AddPolicy("AdminRolePolicy",
                     policy => policy.RequireClaim("Admin"));
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

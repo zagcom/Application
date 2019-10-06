@@ -146,8 +146,7 @@ namespace Application.Controllers
             var roles = roleManager.Roles;
             return View(roles);
         }
-        [HttpGet]
-        [Authorize(Policy ="EditRolePolicy")]
+        [HttpGet]        
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
@@ -176,8 +175,7 @@ namespace Application.Controllers
         }
 
         // This action responds to HttpPost and receives EditRoleViewModel
-        [HttpPost]
-        [Authorize(Policy = "EditRolePolicy")]
+        [HttpPost]        
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await roleManager.FindByIdAsync(model.Id);
@@ -208,7 +206,7 @@ namespace Application.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet]       
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
             ViewBag.roleId = roleId;
@@ -434,6 +432,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
             ViewBag.userId = userId;
@@ -472,6 +471,7 @@ namespace Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
