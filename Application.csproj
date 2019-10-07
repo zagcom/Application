@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>f322bca5-9d94-4e8f-98fe-2153200c0ff0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
