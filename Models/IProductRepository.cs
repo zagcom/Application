@@ -9,8 +9,8 @@ namespace Application.Models
     {
         Product GetProduct(string Id);
         IEnumerable<Product> GetAllProduct();
-        Product Add(Product employee);
-        Product Update(Product employeeChanges);
+        Product Add(Product product);
+        Product Update(Product productChanges);
         Product Delete(string id);
     }
 }

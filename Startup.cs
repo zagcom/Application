@@ -64,7 +64,7 @@ namespace Application
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();
-
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
             services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
         }

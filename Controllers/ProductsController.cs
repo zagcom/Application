@@ -25,6 +25,8 @@ namespace Application.Controllers
             this.hostingEnvironment = hostingEnvironment;
             this.logger = logger;
         }
+
+
         [AllowAnonymous]
         public ViewResult Index()
         {
@@ -35,12 +37,7 @@ namespace Application.Controllers
         [AllowAnonymous]
         public ViewResult Details(string id)
         {
-            logger.LogTrace("Trace Log");
-            logger.LogDebug("Debug Log");
-            logger.LogInformation("Information Log");
-            logger.LogWarning("Warning Log");
-            logger.LogError("Error Log");
-            logger.LogCritical("Critical Log");
+            
 
             Product product = _productRepository.GetProduct(id);
 

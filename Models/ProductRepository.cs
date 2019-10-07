@@ -17,11 +17,11 @@ namespace Application.Models
             this.logger = logger;
         }
 
-        public Product Add(Product employee)
+        public Product Add(Product product)
         {
-            context.Products.Add(employee);
+            context.Products.Add(product);
             context.SaveChanges();
-            return employee;
+            return product;
         }
 
         public Product Delete(string id)
