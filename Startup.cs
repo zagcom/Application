@@ -44,6 +44,12 @@ namespace Application
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
 
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "481779421605-k6v8rt01g2tgg89m0kb0b32op3asip2h.apps.googleusercontent.com";
+                options.ClientSecret = "owaKmUlXja4tLrKpjuVcAyMQ";
+            });
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
