@@ -48,6 +48,10 @@ namespace Application
             {
                 options.ClientId = "481779421605-k6v8rt01g2tgg89m0kb0b32op3asip2h.apps.googleusercontent.com";
                 options.ClientSecret = "owaKmUlXja4tLrKpjuVcAyMQ";
+            }).AddFacebook(options =>
+            {
+                options.AppId = "382779812658277";
+                options.AppSecret = "f8c2179cadadeded564c1e550e377b3f";
             });
 
             services.ConfigureApplicationCookie(options =>
