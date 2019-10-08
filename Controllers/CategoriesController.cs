@@ -76,5 +76,31 @@ namespace Application.Controllers
 
         }
 
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Category category = _categoryRepository.GetCategory(id);
+            
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category model)
+        {
+            if (ModelState.IsValid)
+            {
+                Category category = _categoryRepository.GetCategory(model.Id);
+
+                category.Name = model.Name;
+                category.CategoryLevel = model.CategoryLevel;          
+
+                _categoryRepository.Update(category);
+                return RedirectToAction("index");
+            }
+
+            return View();
+
+        }
+
     }
 }
