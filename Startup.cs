@@ -34,6 +34,7 @@ namespace Application
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
+                    options.SignIn.RequireConfirmedEmail = true;
                     options.Password.RequiredLength = 10;
                     options.Password.RequiredUniqueChars = 3;                   
                 })
