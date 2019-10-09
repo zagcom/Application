@@ -22,3 +22,34 @@
         </div>
     }
 </div>
+
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">EAN</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Unit</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.EAN</td>
+            <td>@product.Qty</td>
+            <td>@product.Unit</td>
+            <td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-action="edit" asp-controller="Products" asp-route-id="@product.Id" class="btn btn-outline-primary btn-sm">Edit</a> <a asp-action="delete" asp-controller="Products" asp-route-id="@product.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+                }
+            </td>
+        </tr>
+        }
+
+
+    </tbody>
+</table>

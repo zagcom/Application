@@ -1,32 +1,36 @@
 ﻿@model IEnumerable<Category>
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>List of categories</h1>
 
-<table class="table table-sm">
+<table class="table table-hover text-center text-capitalize table-sm">
     <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Level</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var category in Model)
         {
-        <tr>
-            <td>@category.Id</td>
-            <td>@category.Name</td>
-            <td>@category.CategoryLevel</td>
-            <td><a asp-action="edit" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm">Edit</a>   <a asp-action="delete" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a></td>
-            
-        </tr>
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+                <td>@category.CategoryLevel</td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && (UserManager.GetUserId(User) == category.OwnerId))
+                    {
+                        <a asp-action="edit" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm">Edit</a> <a asp-action="delete" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+                    }
+                            </td>
+            </tr>
         }
-        
+
 
     </tbody>
 </table>
