@@ -5,24 +5,6 @@
 
 }
 
-<div class="card-deck">
-    @foreach (var product in Model)
-    {
-        var photoPath = "~/Images/" + (product.PhotoPath ?? "placeholder-image.jpg");
-        <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
-            <div class="card-header">
-                <h5>@product.Name</h5>
-            </div>
-            <img class="card-img-top imageTumbnail" src="@photoPath" asp-append-version="true" />
-            <div class="card-footer text-center">
-                <a asp-controller="products" asp-action="details" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">View</a>
-                <a asp-action="edit" asp-controller="products" asp-route-id="@product.Id" class="btn btn-primary btn-sm m-1">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm m-1">Delete</a>
-            </div>
-        </div>
-    }
-</div>
-
 <table class="table table-hover table-sm">
     <thead>
         <tr>
