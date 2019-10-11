@@ -38,7 +38,8 @@ namespace Application
                     options.Password.RequiredLength = 10;
                     options.Password.RequiredUniqueChars = 3;                   
                 })
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc(options => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
