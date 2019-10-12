@@ -40,30 +40,30 @@ namespace Application.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var vm = new CreateBudgetCategoryViewModel();
+            var model = new CreateBudgetCategoryViewModel();
 
 
-            var model = _categoryRepository.GetAllCategory();
+            model.CategoryLevel1List = _categoryRepository.GetAllCategory().Select(x=>new SelectListItem {Value = x.Id.ToString() , Text = x.Name}).ToList();
            
             
-            foreach (var item in model)
-            {
-                if (item.CategoryLevel.Equals(0)){
-                    vm.CategoryLevel1List.Add(item);
-                }
-                if (item.CategoryLevel.Equals(1))
-                {
-                    vm.CategoryLevel2List.Add(item);
-                }
-                if (item.CategoryLevel.Equals(2))
-                {
-                    vm.CategoryLevel3List.Add(item);
-                }
-            }
+          //  foreach (var item in model)
+            //{
+              //  if (item.CategoryLevel.Equals(0)){
+             //       vm.CategoryLevel1List.Add(item);
+             //   }
+             //   if (item.CategoryLevel.Equals(1))
+              //  {
+              //      vm.CategoryLevel2List.Add(item);
+              //  }
+              //  if (item.CategoryLevel.Equals(2))
+               // {
+               //     vm.CategoryLevel3List.Add(item);
+               // }
+           // }
 
             
 
-            return View(vm);
+            return View(model);
         }
 
         [HttpPost]

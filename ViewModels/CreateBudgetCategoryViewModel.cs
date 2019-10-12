@@ -9,9 +9,10 @@ namespace Application.ViewModels
 {
     public class CreateBudgetCategoryViewModel
     {
-        public List<Category> CategoryLevel1List { get; set; }
-        public List<Category> CategoryLevel2List { get; set; }
-        public List<Category> CategoryLevel3List { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public List<SelectListItem> CategoryLevel1List { get; set; }
+       // public List<Category> CategoryLevel2List { get; set; }
+        //public List<Category> CategoryLevel3List { get; set; }
 
       
 

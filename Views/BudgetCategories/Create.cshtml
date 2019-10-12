@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label asp-for="CategoryLevel1List" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <select asp-for="CategoryLevel1List" class="custom-select mr-sm-2" asp-items="@new SelectList(Model.CategoryLevel1List);"><option value="">Please Select</option></select>
+                    <select asp-for="CategoryLevel1List" class="custom-select mr-sm-2" asp-items="@Model.CategoryLevel1List"><option value="">Please Select</option></select>
                     <span asp-validation-for="CategoryLevel1List" class="text-danger"></span>
                 </div>
             </div>
