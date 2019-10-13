@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Application.Models
 {
-    public class Level2Category : Level1Category
+    public class Level2Category : Category
     {
-       
+        
     }
 }

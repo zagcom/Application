@@ -4,14 +4,16 @@ using Application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191013132041_CategoryLevelsClasses")]
+    partial class CategoryLevelsClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,14 +101,11 @@ namespace Application.Migrations
                     b.ToTable("BudgetCategories");
                 });
 
-            modelBuilder.Entity("Application.Models.Category", b =>
+            modelBuilder.Entity("Application.Models.Level1Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
 
                     b.Property<string>("Name");
 
@@ -114,9 +113,37 @@ namespace Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Level1Categories");
+                });
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Category");
+            modelBuilder.Entity("Application.Models.Level2Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Level2Categories");
+                });
+
+            modelBuilder.Entity("Application.Models.Level3Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Level3Categories");
                 });
 
             modelBuilder.Entity("Application.Models.Product", b =>
@@ -266,27 +293,6 @@ namespace Application.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Application.Models.Level1Category", b =>
-                {
-                    b.HasBaseType("Application.Models.Category");
-
-                    b.HasDiscriminator().HasValue("Level1Category");
-                });
-
-            modelBuilder.Entity("Application.Models.Level2Category", b =>
-                {
-                    b.HasBaseType("Application.Models.Category");
-
-                    b.HasDiscriminator().HasValue("Level2Category");
-                });
-
-            modelBuilder.Entity("Application.Models.Level3Category", b =>
-                {
-                    b.HasBaseType("Application.Models.Category");
-
-                    b.HasDiscriminator().HasValue("Level3Category");
                 });
 
             modelBuilder.Entity("Application.Models.BudgetCategory", b =>
