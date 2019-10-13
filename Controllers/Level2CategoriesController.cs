@@ -10,15 +10,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Controllers
 {
-    public class CategoriesController : Controller
+    public class Level2CategoriesController : Controller
     {
 
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ILevel2CategoryRepository _categoryRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger logger;
 
-        public CategoriesController(ICategoryRepository categoryRepository, IHostingEnvironment hostingEnvironment, ILogger<CategoriesController> logger, UserManager<ApplicationUser> userManager)
+        public Level2CategoriesController(ILevel2CategoryRepository categoryRepository, IHostingEnvironment hostingEnvironment, ILogger<Level2CategoriesController> logger, UserManager<ApplicationUser> userManager)
         {
             _categoryRepository = categoryRepository;
             this.hostingEnvironment = hostingEnvironment;
@@ -37,7 +37,7 @@ namespace Application.Controllers
         {
 
 
-            Category category = _categoryRepository.GetCategory(id);
+            Level2Category category = _categoryRepository.GetCategory(id);
 
             if (category == null)
             {
@@ -57,14 +57,13 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category model)
+        public IActionResult Create(Level2Category model)
         {
             if (ModelState.IsValid)
             {
-                Category newCategory = new Category
+                Level2Category newCategory = new Level2Category
                 {
-                    Name = model.Name,
-                    CategoryLevel = model.CategoryLevel,
+                    Name = model.Name,                    
                     OwnerId = userManager.GetUserId(HttpContext.User)
                 };
 
@@ -79,20 +78,20 @@ namespace Application.Controllers
         [HttpGet]
         public ViewResult Edit(int id)
         {
-            Category category = _categoryRepository.GetCategory(id);
+            Level2Category category = _categoryRepository.GetCategory(id);
             
             return View(category);
         }
 
         [HttpPost]
-        public IActionResult Edit(Category model)
+        public IActionResult Edit(Level2Category model)
         {
             if (ModelState.IsValid)
             {
-                Category category = _categoryRepository.GetCategory(model.Id);
+                Level2Category category = _categoryRepository.GetCategory(model.Id);
 
                 category.Name = model.Name;
-                category.CategoryLevel = model.CategoryLevel;          
+                       
 
                 _categoryRepository.Update(category);
                 return RedirectToAction("index");

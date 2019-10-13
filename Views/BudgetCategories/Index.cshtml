@@ -11,9 +11,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Level 1</th>
-            <th scope="col">Level 2</th>
-            <th scope="col">Level 3</th>
+            
             <th></th>
         </tr>
     </thead>
@@ -23,9 +21,7 @@
         <tr>
             <td>@category.Id</td>
             <td>@category.Name</td>
-            <td>@category.CategoryLevel1</td>
-            <td>@category.CategoryLevel2</td>
-            <td>@category.CategoryLevel3</td>
+            
 
             <td>
                 @if (SignInManager.IsSignedIn(User) && (UserManager.GetUserId(User) == category.OwnerId))

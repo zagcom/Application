@@ -8,9 +8,9 @@ namespace Application.Models
     public class BudgetCategory
     {
         public int Id { get; set; }
-        public Category CategoryLevel1 { get; set; }
-        public Category CategoryLevel2 { get; set; }
-        public Category CategoryLevel3 { get; set; }
+        public Level1Category Level1Category { get; set; }
+        public Level2Category Level2Category { get; set; }
+        public Level3Category Level3Category { get; set; }
         public string Name { get; set; }
         public string OwnerId { get; set; }
     }

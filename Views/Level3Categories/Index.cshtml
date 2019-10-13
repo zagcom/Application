@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Category>
+﻿@model IEnumerable<Level3Category>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,8 +10,7 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Level</th>
+            <th scope="col">Name</th>            
             <th></th>
         </tr>
     </thead>
@@ -20,12 +19,11 @@
         {
             <tr>
                 <td>@category.Id</td>
-                <td>@category.Name</td>
-                <td>@category.CategoryLevel</td>
+                <td>@category.Name</td>                
                 <td>
                     @if (SignInManager.IsSignedIn(User) && (UserManager.GetUserId(User) == category.OwnerId))
                     {
-                        <a asp-action="edit" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm">Edit</a> <a asp-action="delete" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+                        <a asp-action="edit" asp-controller="Level3Categories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm">Edit</a> <a asp-action="delete" asp-controller="Level3Categories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
                     }
                             </td>
             </tr>

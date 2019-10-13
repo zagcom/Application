@@ -14,13 +14,13 @@ namespace Application.Controllers
 {
     public class BudgetCategoriesController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ILevel1CategoryRepository _categoryRepository;
         private readonly IBudgetCategoryRepository _budgetCategoryRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger<BudgetCategoriesController> logger;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public BudgetCategoriesController(ICategoryRepository categoryRepository, IBudgetCategoryRepository budgetCategoryRepository, IHostingEnvironment hostingEnvironment, ILogger<BudgetCategoriesController> logger, UserManager<ApplicationUser> userManager)
+        public BudgetCategoriesController(ILevel1CategoryRepository categoryRepository, IBudgetCategoryRepository budgetCategoryRepository, IHostingEnvironment hostingEnvironment, ILogger<BudgetCategoriesController> logger, UserManager<ApplicationUser> userManager)
         {
             _categoryRepository = categoryRepository;
             _budgetCategoryRepository = budgetCategoryRepository;
@@ -74,9 +74,9 @@ namespace Application.Controllers
                 BudgetCategory newCategory = new BudgetCategory
                 {
                     Name = model.Name,
-                    CategoryLevel1 = model.CategoryLevel1,
-                    CategoryLevel2 = model.CategoryLevel2,
-                    CategoryLevel3 = model.CategoryLevel3,
+                  //  CategoryLevel1 = model.CategoryLevel1,
+                  //  CategoryLevel2 = model.CategoryLevel2,
+                  //  CategoryLevel3 = model.CategoryLevel3,
                     OwnerId = userManager.GetUserId(HttpContext.User)
                 };
 

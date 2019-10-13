@@ -1,0 +1,30 @@
+﻿@model Level2Category
+@{
+
+    ViewBag.Title = "Category Details";
+    
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Name</h1>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="categories" asp-action="index" class="btn btn-primary btn-sm">Back</a>
+                <a asp-action="edit" asp-controller="Level2Categories" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
+                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts
+
+{
+    <script src="~/js/CustomScript.js"></script>
+}

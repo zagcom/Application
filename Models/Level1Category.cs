@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace Application.Models
 {
-    public class Category
+    public class Level1Category
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public CategoryLevel CategoryLevel { get; set; }
+        public string Name { get; set; }        
         public string OwnerId { get; set; }
     }
 }
