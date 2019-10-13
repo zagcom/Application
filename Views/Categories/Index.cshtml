@@ -1,0 +1,107 @@
+﻿@model AllLevelCategoryViewModel
+@{
+    ViewData["Title"] = "Kategorie";
+}
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            
+            <div class="card">
+                <div class="card-header">
+                    Level 1 Category
+                    
+                </div>
+                <div class="card-body">
+                    <a asp-action="create" asp-controller="Level1Categories" class="btn btn-outline-primary btn-sm">Add new</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in Model.Level1Category)
+                    {
+                    <li class="list-group-item">@item.Name
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                        <div class="btn-group float-right" role="group">
+                            <a asp-action="edit" asp-controller="Level1Categories" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Edit</a>
+                            <a asp-action="delete" asp-controller="Level1Categories" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+
+                        </div>
+                        }
+                    </li>
+                       
+                    }
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header">
+                    Level 2 Category
+                    
+                </div>
+                <div class="card-body">
+                    <a asp-action="create" asp-controller="Level2Categories" class="btn btn-outline-primary btn-sm">Add new</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in Model.Level2Category)
+                    {
+                        <li class="list-group-item">
+                            @item.Name
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="btn-group float-right" role="group">
+                                <a asp-action="edit" asp-controller="Level2Categories" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Edit</a>
+                                <a asp-action="delete" asp-controller="Level2Categories" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+
+                            </div>
+                        }
+                    </li>
+
+                }
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header">
+                    Level 3 Category
+                    
+                </div>
+                <div class="card-body">
+                    <a asp-action="create" asp-controller="Level3Categories" class="btn btn-outline-primary btn-sm">Add new</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in Model.Level3Category)
+                    {
+                    <li class="list-group-item clearfix">
+                        @item.Name
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                        <div class="btn-group float-right" role="group" >
+                            <a asp-action="edit" asp-controller="Level3Categories" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Edit</a>
+                            <a asp-action="delete" asp-controller="Level3Categories" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+                            
+                        </div>
+                            
+                        }
+                    </li>
+
+                }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

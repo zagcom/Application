@@ -68,7 +68,7 @@ namespace Application.Controllers
                 };
 
                 _categoryRepository.Add(newCategory);
-                return RedirectToAction("details", new { id = newCategory.Id });
+                return RedirectToAction("index", "Categories");
             }
 
             return View();
@@ -94,7 +94,7 @@ namespace Application.Controllers
                        
 
                 _categoryRepository.Update(category);
-                return RedirectToAction("index");
+                return RedirectToAction("index", "Categories");
             }
 
             return View();
