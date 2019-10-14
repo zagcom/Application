@@ -14,15 +14,25 @@ namespace Application.Controllers
 {
     public class BudgetCategoriesController : Controller
     {
-        private readonly ILevel1CategoryRepository _categoryRepository;
+        private readonly ILevel1CategoryRepository _level1CategoryRepository;
+        private readonly ILevel2CategoryRepository _level2CategoryRepository;
+        private readonly ILevel3CategoryRepository _level3CategoryRepository;
         private readonly IBudgetCategoryRepository _budgetCategoryRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger<BudgetCategoriesController> logger;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public BudgetCategoriesController(ILevel1CategoryRepository categoryRepository, IBudgetCategoryRepository budgetCategoryRepository, IHostingEnvironment hostingEnvironment, ILogger<BudgetCategoriesController> logger, UserManager<ApplicationUser> userManager)
+        public BudgetCategoriesController(ILevel1CategoryRepository level1CategoryRepository,
+            ILevel2CategoryRepository level2CategoryRepository,
+            ILevel3CategoryRepository level3CategoryRepository, 
+            IBudgetCategoryRepository budgetCategoryRepository,
+            IHostingEnvironment hostingEnvironment,
+            ILogger<BudgetCategoriesController> logger,
+            UserManager<ApplicationUser> userManager)
         {
-            _categoryRepository = categoryRepository;
+            _level1CategoryRepository = level1CategoryRepository;
+            _level2CategoryRepository = level2CategoryRepository;
+            _level3CategoryRepository = level3CategoryRepository;
             _budgetCategoryRepository = budgetCategoryRepository;
             this.hostingEnvironment = hostingEnvironment;
             this.logger = logger;
@@ -40,28 +50,16 @@ namespace Application.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new CreateBudgetCategoryViewModel();
+            var level1CategoryList = _level1CategoryRepository.GetAllCategory().ToList();
+            var level2CategoryList = _level2CategoryRepository.GetAllCategory().ToList();
+            var level3CategoryList = _level3CategoryRepository.GetAllCategory().ToList();
 
-
-            model.CategoryLevel1List = _categoryRepository.GetAllCategory().Select(x=>new SelectListItem {Value = x.Id.ToString() , Text = x.Name}).ToList();
-           
-            
-          //  foreach (var item in model)
-            //{
-              //  if (item.CategoryLevel.Equals(0)){
-             //       vm.CategoryLevel1List.Add(item);
-             //   }
-             //   if (item.CategoryLevel.Equals(1))
-              //  {
-              //      vm.CategoryLevel2List.Add(item);
-              //  }
-              //  if (item.CategoryLevel.Equals(2))
-               // {
-               //     vm.CategoryLevel3List.Add(item);
-               // }
-           // }
-
-            
+            var model = new CreateBudgetCategoryViewModel {
+            Level1Categories = level1CategoryList,
+            Level2Categories = level2CategoryList,
+            Level3Categories = level3CategoryList
+            };
+                                              
 
             return View(model);
         }
@@ -69,19 +67,22 @@ namespace Application.Controllers
         [HttpPost]
         public IActionResult Create(BudgetCategory model)
         {
+            var level1Category = _level1CategoryRepository.GetCategory(model.Level1CategoryId);
+            var level2Category = _level2CategoryRepository.GetCategory(model.Level2CategoryId);
+            var level3Category = _level3CategoryRepository.GetCategory(model.Level3CategoryId);
             if (ModelState.IsValid)
             {
                 BudgetCategory newCategory = new BudgetCategory
                 {
-                    Name = model.Name,
-                  //  CategoryLevel1 = model.CategoryLevel1,
-                  //  CategoryLevel2 = model.CategoryLevel2,
-                  //  CategoryLevel3 = model.CategoryLevel3,
+                    Name = level1Category.Name + " -> "+ level2Category.Name + " -> "+ level3Category.Name,
+                    Level1CategoryId = model.Level1CategoryId,
+                    Level2CategoryId = model.Level2CategoryId,
+                    Level3CategoryId = model.Level3CategoryId,
                     OwnerId = userManager.GetUserId(HttpContext.User)
                 };
 
                 _budgetCategoryRepository.Add(newCategory);
-                return RedirectToAction("details", new { id = newCategory.Id });
+                return RedirectToAction("index","BudgetCategories");
             }
 
             return View();
