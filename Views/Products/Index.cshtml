@@ -13,6 +13,7 @@
             <th scope="col">Qty</th>
             <th scope="col">Unit</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,8 @@
             <td>@product.EAN</td>
             <td>@product.Qty</td>
             <td>@product.Unit</td>
+            <td>@product.BudgetCategory.Name</td>
+            
             <td>
                 @if (SignInManager.IsSignedIn(User))
                 {

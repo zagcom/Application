@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,17 +38,13 @@ namespace Application.Models
 
         public IEnumerable<Product> GetAllProduct()
         {
-            return context.Products;
+            var model = context.Products.Include(p => p.BudgetCategory).ToList();
+            return model;
         }
 
         public Product GetProduct(string Id)
         {
-            logger.LogTrace("Trace Log");
-            logger.LogDebug("Debug Log");
-            logger.LogInformation("Information Log");
-            logger.LogWarning("Warning Log");
-            logger.LogError("Error Log");
-            logger.LogCritical("Critical Log");
+            
 
             return context.Products.Find(Id);
         }
@@ -55,7 +52,7 @@ namespace Application.Models
         public Product Update(Product productChanges)
         {
             var product = context.Products.Attach(productChanges);
-            product.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            product.State = EntityState.Modified;
             context.SaveChanges();
             return productChanges;
         }
