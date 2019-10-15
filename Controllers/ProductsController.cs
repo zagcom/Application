@@ -18,12 +18,14 @@ namespace Application.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger logger;
+        private readonly IBudgetCategoryRepository budgetCategoryRepository;
 
-        public ProductsController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment, ILogger<ProductsController> logger)
+        public ProductsController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment, ILogger<ProductsController> logger, IBudgetCategoryRepository budgetCategoryRepository)
         {
             _productRepository = productRepository;
             this.hostingEnvironment = hostingEnvironment;
             this.logger = logger;
+            this.budgetCategoryRepository = budgetCategoryRepository;
         }
 
 
@@ -59,7 +61,12 @@ namespace Application.Controllers
         [HttpGet]        
         public ViewResult Create()
         {
-            return View();
+            var budgetCategoryList = budgetCategoryRepository.GetAllBudgetCategory().ToList();
+            var model = new ProductCreateViewModel
+            {
+                BudgetCategories = budgetCategoryList
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -74,6 +81,7 @@ namespace Application.Controllers
                     Qty = model.Qty,
                     EAN = model.EAN,
                     Unit = model.Unit,
+                    BudgetCategoryId = model.BudgetCategoryId,                    
                     PhotoPath = uniqueFileName
                 };
 
@@ -88,6 +96,8 @@ namespace Application.Controllers
         [HttpGet]
         public ViewResult Edit(string id)
         {
+            var budgetCategoryList = budgetCategoryRepository.GetAllBudgetCategory().ToList();
+
             Product product = _productRepository.GetProduct(id);
             ProductEditViewModel productEditViewModel = new ProductEditViewModel
             {
@@ -96,8 +106,16 @@ namespace Application.Controllers
                 Qty = product.Qty,
                 Unit = product.Unit,
                 EAN = product.EAN,
-                ExistingPhotoPath = product.PhotoPath
-            };
+                BudgetCategories = budgetCategoryList,
+                BudgetCategoryId = product.BudgetCategoryId,
+                ExistingPhotoPath = product.PhotoPath,
+                
+                };
+
+            //if (product.BudgetCategoryId == null) { productEditViewModel.BudgetCategoryId = 2; }
+            //else { productEditViewModel.BudgetCategoryId = product.BudgetCategoryId; } ;
+
+            
             return View(productEditViewModel);
         }
 
@@ -112,6 +130,7 @@ namespace Application.Controllers
                 product.Qty = model.Qty;
                 product.Unit = model.Unit;
                 product.EAN = model.EAN;
+                product.BudgetCategoryId = model.BudgetCategoryId;
 
                 if(model.Photo != null)
 

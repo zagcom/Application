@@ -17,5 +17,7 @@ namespace Application.ViewModels
         public Unit? Unit { get; set; }
         public float Qty { get; set; }
         public IFormFile Photo { get; set; }
+        public IEnumerable<BudgetCategory> BudgetCategories { get; set; }
+        public int? BudgetCategoryId { get; set; }
     }
 }

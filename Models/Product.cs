@@ -16,5 +16,7 @@ namespace Application.Models
         public Unit? Unit { get; set; }
         public float Qty { get; set; }
         public string PhotoPath { get; set; }
+        public BudgetCategory BudgetCategory { get; set; }
+        public int? BudgetCategoryId { get; set; }
     }
 }
