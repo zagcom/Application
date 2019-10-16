@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Application.Models
 
         public IEnumerable<BudgetCategory> GetAllBudgetCategory()
         {
-            return context.BudgetCategories;
+            return context.BudgetCategories.Include(b=>b.Level1Category).Include(b => b.Level2Category).Include(b => b.Level3Category).OrderBy(c=>c.Level1Category.Name);
         }
 
         public BudgetCategory GetBudgetCategory(int Id)

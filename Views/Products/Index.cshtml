@@ -10,7 +10,9 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">EAN</th>
-            
+
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -21,9 +23,11 @@
         <tr>
             <td>@product.Name</td>
             <td>@product.EAN</td>
-            
-            <td>@product.BudgetCategory.Name</td>
-            
+
+            <td>@product.BudgetCategory.Level1Category.Name</td>
+            <td>@product.BudgetCategory.Level2Category.Name</td>
+            <td>@product.BudgetCategory.Level3Category.Name</td>
+
             <td>
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -31,8 +35,8 @@
                         <a asp-action="edit" asp-controller="Products" asp-route-id="@product.Id" class="btn btn-outline-primary btn-sm" style="width:auto"><i class="far fa-edit"></i></a>
                         <a asp-action="delete" asp-controller="Products" asp-route-id="@product.Id" class="btn btn-outline-danger btn-sm form-inline" style="width:auto"><i class="far fa-trash-alt"></i></a>
                     </div>
-                    
-                 }
+
+                }
             </td>
         </tr>
         }

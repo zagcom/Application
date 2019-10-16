@@ -10,8 +10,9 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            
+            <th scope="col">Category 1</th>
+            <th scope="col">Category 2</th>
+            <th scope="col">Category 3</th>
             <th></th>
         </tr>
     </thead>
@@ -20,13 +21,18 @@
         {
         <tr>
             <td>@category.Id</td>
-            <td>@category.Name</td>
-            
+            <td>@category.Level1Category.Name</td>
+            <td>@category.Level2Category.Name</td>
+            <td>@category.Level3Category.Name</td>
+
 
             <td>
                 @if (SignInManager.IsSignedIn(User) && (UserManager.GetUserId(User) == category.OwnerId))
                 {
-                    <a asp-action="edit" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm">Edit</a> <a asp-action="delete" asp-controller="Categories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline">Delete</a>
+                    <div class="btn-group float-right" role="group">
+                        <a asp-action="edit" asp-controller="BudgetCategories" asp-route-id="@category.Id" class="btn btn-outline-primary btn-sm" style="width:auto"><i class="far fa-edit"></i></a>
+                        <a asp-action="delete" asp-controller="BudgetCategories" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm form-inline" style="width:auto"><i class="far fa-trash-alt"></i></a>
+                    </div>                  
                 }
             </td>
         </tr>

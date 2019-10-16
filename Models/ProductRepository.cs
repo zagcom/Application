@@ -38,7 +38,11 @@ namespace Application.Models
 
         public IEnumerable<Product> GetAllProduct()
         {
-            var model = context.Products.Include(p => p.BudgetCategory).ToList();
+            var model = context.Products.Include(p => p.BudgetCategory).ThenInclude(c=>c.Level1Category)
+                .Include(p => p.BudgetCategory).ThenInclude(c => c.Level2Category)
+                .Include(p => p.BudgetCategory).ThenInclude(c => c.Level3Category)
+                .OrderBy(c=>c.Name)
+                .ToList();
             return model;
         }
 
